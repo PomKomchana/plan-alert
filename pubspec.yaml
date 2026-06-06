@@ -34,17 +34,23 @@ dependencies:
   # App icons (iOS style icons)
   cupertino_icons: ^1.0.8
 
+  # FIREBASE
   # Firebase core (must-have for Firebase)
   firebase_core: ^3.6.0
-
   # Login system (auth / sign in / sign up)
   firebase_auth: ^5.3.0
-
   # Database (store app data)
   cloud_firestore: ^5.4.0
 
   # Storage (upload images/files)
   firebase_storage: ^12.3.0
+  
+  # Pick images from gallery/camera
+  image_picker: ^1.1.2
+
+  # Google Maps 
+  google_maps_flutter: ^2.12.3
+  geolocator: ^14.0.1
 
 dev_dependencies:
   flutter_test:
