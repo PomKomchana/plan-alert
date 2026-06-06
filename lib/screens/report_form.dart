@@ -47,6 +47,7 @@ class _ReportFormState extends State<ReportForm> {
     'ชั้น 5',
     'ชั้น 6',
     'ชั้น 7',
+    'ชั้น 8',
   ];
 
   // ===== Pick Image =====
