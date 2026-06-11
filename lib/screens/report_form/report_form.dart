@@ -49,7 +49,7 @@ class _ReportFormState extends State<ReportForm> with TickerProviderStateMixin {
 // ----------------------------------------------------------------------------------------------------
 
   /// [5.1 Controllers] (ตัวควบคุม)
-  // Controllers [_descControllere, _mapController, _imagePicker]
+  // Controllers [_descController, _mapController, _imagePicker]
   final _dateController = TextEditingController();
   final _usernameController = TextEditingController();
   final _phoneController = TextEditingController();
@@ -162,7 +162,7 @@ class _ReportFormState extends State<ReportForm> with TickerProviderStateMixin {
   // ----------------------------------------------------------------------------------------------------
 
   /// [5.4 Helper / Logic Methods] (ฟังก์ชันช่วย + ตรรกะ | ทำงานเบื้องหลัง / ไม่ใช่สร้าง UI)
-  // Request GPS permission and move map to user location
+  // Request GPS permission and move map to user location [_requestLocationAndMove]
   Future<void> _requestLocationAndMove() async {
     try {
       var permission = await Geolocator.checkPermission();
@@ -190,7 +190,7 @@ class _ReportFormState extends State<ReportForm> with TickerProviderStateMixin {
     }
   }
 
-  // Expand / collapse map and optionally enter picking mode
+  // Expand / collapse map and optionally enter picking mode [_toggleMapExpand]
   void _toggleMapExpand({bool enterPickingMode = false}) {
     HapticFeedback.lightImpact();
     setState(() {
@@ -212,7 +212,7 @@ class _ReportFormState extends State<ReportForm> with TickerProviderStateMixin {
     });
   }
 
-  // Handle map tap and set pin location
+  // Handle map tap and set pin location [_onMapTapped]
   void _onMapTapped(TapPosition tapPosition, LatLng tappedPosition) {
     if (!_isPickingMode) return;
 
@@ -232,7 +232,7 @@ class _ReportFormState extends State<ReportForm> with TickerProviderStateMixin {
     _mapController.move(tappedPosition, 18);
   }
 
-  // Confirm selected pin location
+  // Confirm selected pin location [_confirmPin]
   void _confirmPin() {
     HapticFeedback.mediumImpact();
     _toggleMapExpand(); // ย่อแผนที่กลับ
@@ -663,11 +663,15 @@ void _cycleMapMode() {
             readOnly: true,
             decoration: InputDecoration(
               labelText: 'วันที่แจ้งซ่อม',
+              labelStyle: TextStyle(color: Colors.grey.shade400, fontSize: 14),
               prefixIcon: const Icon(Icons.calendar_today, color: _emasColor),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide:
-                    const BorderSide(color: _emasColor, width: 2),
+                borderSide: BorderSide(color: Colors.grey.shade200, width: 1),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: const BorderSide(color: _emasColor, width: 2),
               ),
             ),
 
@@ -687,33 +691,41 @@ void _cycleMapMode() {
 
           const SizedBox(height: 10),
 
-          // ชื่อผู้แจ้ง
+          // Username "ชื่อผู้แจ้ง"
           TextField(
             controller: _usernameController,
             decoration: InputDecoration(
               labelText: 'ชื่อผู้แจ้ง',
+              labelStyle: TextStyle(color: Colors.grey.shade400, fontSize: 14),
               prefixIcon: const Icon(Icons.person, color: _emasColor),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide:
-                    const BorderSide(color: _emasColor, width: 2),
+                borderSide: BorderSide(color: Colors.grey.shade200, width: 1),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: const BorderSide(color: _emasColor, width: 2),
               ),
             ),
           ),
 
           const SizedBox(height: 10),
 
-          // เบอร์ติดต่อ
+          // User Phone Numbers "เบอร์ติดต่อ"
           TextField(
             controller: _phoneController,
             keyboardType: TextInputType.phone,
             decoration: InputDecoration(
               labelText: 'เบอร์ติดต่อ',
+              labelStyle: TextStyle(color: Colors.grey.shade400, fontSize: 14),
               prefixIcon: const Icon(Icons.phone, color: _emasColor),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide:
-                    const BorderSide(color: _emasColor, width: 2),
+                borderSide: BorderSide(color: Colors.grey.shade200, width: 1),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: const BorderSide(color: _emasColor, width: 2),
               ),
             ),
           ),
@@ -751,7 +763,7 @@ void _cycleMapMode() {
           _buildStyledDropdown(
             value: _selectedRoom,
             hint: 'เลือกห้อง',
-            icon: Icons.room,
+            icon: Icons.meeting_room_outlined,
             items: _roomOptions,
             onChanged: (value) => setState(() => _selectedRoom = value),
           ),
@@ -775,26 +787,15 @@ void _cycleMapMode() {
             style: const TextStyle(fontSize: 14, height: 1.5),
             decoration: InputDecoration(
               hintText: 'อธิบายปัญหาที่พบ...',
-              hintStyle:
-                  TextStyle(color: Colors.grey.shade400, fontSize: 14),
+              hintStyle: TextStyle(color: Colors.grey.shade400, fontSize: 14),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide:
-                    BorderSide(color: Colors.grey.shade200, width: 1),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide:
-                    BorderSide(color: Colors.grey.shade200, width: 1),
+                borderSide: BorderSide(color: Colors.grey.shade200, width: 1),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide:
-                    const BorderSide(color: _emasColor, width: 2),
+                borderSide: const BorderSide(color: _emasColor, width: 2),
               ),
-              filled: true,
-              fillColor: Colors.grey.shade50,
-              contentPadding: const EdgeInsets.all(14),
             ),
           ),
         ],
