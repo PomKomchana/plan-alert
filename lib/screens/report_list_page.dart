@@ -135,7 +135,7 @@ class _ShimmerCard extends AnimatedWidget {
   }
 }
 
-// ── Empty / Error states ──────────────────────────────────────────────────────
+// ── Empty / Error states ─────────────────────────────────────────────────────
 
 class _EmptyState extends StatelessWidget {
   const _EmptyState({super.key});
